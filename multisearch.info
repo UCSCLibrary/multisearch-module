@@ -1,0 +1,9 @@
+name= Multisearch
+description = "Create a tabbed search block for the UCSC Library website."
+package = UCSC Library
+version = 7.x.1.0
+core = 7.x
+files[] = multisearch.module,
+files[] = multisearch.js,
+files[] = multisearch.css,
+dependencies[] = block

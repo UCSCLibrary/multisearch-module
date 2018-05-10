@@ -1,0 +1,72 @@
+<?php
+
+/**
+ * @file
+ * Create a search block
+ */
+
+/**
+ * Implements hook_block_info().
+ */
+function multisearch_block_info() {
+  $blocks['multisearch'] = array(
+    'info' => t('Multisearch'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function multisearch_block_view() {
+
+/**
+ * Calling the js file
+ */
+
+drupal_add_js(drupal_get_path('module', 'multisearch') . '/multisearch.js');
+
+/**
+ * Calling the css file
+ */
+
+drupal_add_css(drupal_get_path('module', 'multisearch') . '/multisearch.css');
+
+/**
+ * Block content
+ */  
+
+  $tabs = "<ul class='tablist'><li><a class='tab tab1 current' href='#'>Articles<span>in ASC</span></a></li><li><a class='tab tab2' href='#'>Books &amp; More<span>at UCSC</span></a></li><li><a class='tab tab3' href='#'>Other Libraries<span>Melvyl</span></a></li><li><a class='tab tab4' href='#'>Course Reserves<span>&nbsp;</span></a></li><li><a class='tab tab5' href='#'>Google Scholar<span>with UC e-links</span></a></li></ul>";
+
+  $journalsTabsContent = "<div class='tabcontent1 tabcontent'><form class='journalsForm' action='' method='get'><input id='ebscohosttabstext' name='ebscohostsearchtext' title='searchterm' class='journalsSearch textbox' type='text' placeholder='Search for articles in Academic Search Complete...' value='' title='search' aria-label='journals search terms'><div class='submit'><input class='journalsTabsSubmit' type='submit' value='Search' name='submit' aria-label='journals search submit'></div></form><ul class='multisearch-links'><li><a href='http://guides.library.ucsc.edu/az.php'>Article Databases</a></li><li><a href='http://ucelinks.cdlib.org:8888/citation_new/sfx_local'>Find an Article by Citation</a></li></ul></div>";
+	
+ $journalsSelectContent = "<div class='tabcontent1 tabcontent'><form class='journalsForm' action='' method='get'><input id='ebscohostselecttext' name='ebscohostsearchtext' title='searchterm' class='journalsSearch textbox' type='text' placeholder='Search for articles in Academic Search Complete...' value='' title='search' aria-label='journals search terms'><div class='submit'><input class='journalsSelectSubmit' type='submit' value='Search' name='submit' aria-label='journals search submit'></div></form><ul class='multisearch-links'><li><a href='http://guides.library.ucsc.edu/az.php'>Article Databases</a></li><li><a href='http://ucelinks.cdlib.org:8888/citation_new/sfx_local'>Find an Article by Citation</a></li></ul></div>";
+
+  $catalogsContent = "<div class='tabcontent2 tabcontent'><form class='catalogsForm' action='' method='get'><input class='catalogsSearch textbox' type='text' placeholder ='Search Cruzcat for books, media, journal titles available at UCSC...' name='SEARCH' value='' aria-label='catalogs search terms'><div class='submit'><input class='catalogsSubmit' type='submit' value='Search' aria-label='journals search submit'></div></form><ul class='multisearch-links'><li><a href='https://cruzcat.ucsc.edu/'>Cruzcat Catalog</a></li><li><a href='http://ucelinks.cdlib.org:8888/sfx_ucsc/journalsearch?'>Online Journals</a></li></ul></div>";
+
+$melvylContent = "<div class='tabcontent3 tabcontent'><form class='melvylForm' action='' method='get' name='search'><input name='qt' value='advanced' type='hidden' aria-label='form url element'><input id='scope' name='scope' value='1' type='hidden' aria-label='search scope value'><input id='searchtype' name='limit-5-mt' title='searchtype' value='' type='hidden' aria-label='search type'><input id='search1' name='search1' value='idx_kw' type='hidden' aria-label='form url element'><input class='melvylSearch textbox' type='text' placeholder ='Search Melvyl for books, media, journal titles in UC libraries...' name='i1' title='search1input' value='' aria-label='melvyl search terms'><div class='submit'><input class='melvylSubmit' type='submit' name='submit' value='Search' aria-label='melvyl search submit'></div></form><ul class='multisearch-links'><li><a href='http://ucsc.worldcat.org/advancedsearch'>Advanced Search</a></li><li><a href='http://guides.library.ucsc.edu/ill'>Interlibrary Loan Help</a></li><li><a href='https://ucsc.worldcat.org/search?scope=0'>Search Worldwide</a></li></ul></div>";
+
+  $reservesContent = "<div class='tabcontent4 tabcontent'><form class='reservesForm' action='https://cruzcat.ucsc.edu/search/r' id='reservesform' method='get' name='reservesform' target='_blank'><select id='searchres' name='searchtype' title='search by' aria-label='search type'><option class='r' selected='selected' value='r'>Course</option><option class='p' value='p'>Instructor</option></select><input class='reservesSearch textbox' maxlength='75' name='searcharg' size='17' title='search box' type='text' placeholder ='Find books and materials on reserve for your course...' value='' aria-label='reserves search terms' /><input name='SORT' type='hidden' value='D' aria-label='reserves search sort' /><div class='submit'><input class='reservesSubmit' type='submit' value='Search' aria-label='reserves search submit' formtarget='_self'></div></form><ul class='multisearch-links'><li><a href='https://guides.library.ucsc.edu/reserves/instructors'>Instructors: Request Course Reserves</a></li><li></ul></div>";
+
+  $scholarContent = "<div class='tabcontent5 tabcontent'><form class='scholarForm' action='' method='post'><input class='scholarSearch textbox' type='text' placeholder ='Search for articles through Google Scholar...' name='googlescholar' value='' aria-label='google scholar search terms'><div class='submit'><input class='scholarSubmit' type='submit' value='Search' aria-label='google scholar search submit'></div></form><ul class='multisearch-links'><li><a href='https://books.google.com/'>Google Books</a></li><li></ul></div>";
+
+$selectlist ="<div><select class='multiselect'><option value='tabcontent1'>Articles</option><option value='tabcontent2'>Books &amp; More -- at UCSC</option><option value='tabcontent3'>Other Libraries -- Melvyl</option><option value='tabcontent4'>Course Reserves</option><option value='tabcontent5'>Google Scholar -- with UC e-links</option></select></div>";
+
+  $tabStart = "<div class='tabs'>";
+  $tabEnd = "</div>";  
+  $selectStart = "<div class='select'>";
+  $selectEnd = "</div>";
+$selectContent = $selectStart.$selectlist.$journalsSelectContent.$catalogsContent.$melvylContent.$reservesContent.$scholarContent.$selectEnd;
+$tabContent = $tabStart.$tabs.$journalsTabsContent.$catalogsContent.$melvylContent.$reservesContent.$scholarContent.$tabEnd;
+  $multiStart = "<div class='multisearch'>";
+  $multiEnd = "</div>";
+
+  $content = $multiStart.$tabContent.$selectContent.$multiEnd;
+  $block = array(
+    'subject' => t("Multisearch"),
+    'content' => $content,
+  );
+  return $block;
+
+}
