@@ -1,4 +1,7 @@
 // JavaScript Document
+
+/* Note: there are also scripts in the theme javascript file (themes/spencer/js/spencer.js) that support this module.*/
+
 jQuery( document ).ready(function() {
 	
 	// Set textbox values
@@ -32,43 +35,29 @@ jQuery( document ).ready(function() {
 		jQuery(".tab").removeClass("current");
 		jQuery(".tab3").addClass("current");
 	});
-	jQuery(".tab4").click(function (e) {
-		e.preventDefault();
-		jQuery(".tabcontent").hide();
-		jQuery(".tabcontent4").show();
-		jQuery(".tab").removeClass("current");
-		jQuery(".tab4").addClass("current");
-	});
-	jQuery(".tab5").click(function (e) {
-		e.preventDefault();
-		jQuery(".tabcontent").hide();
-		jQuery(".tabcontent5").show();
-		jQuery(".tab").removeClass("current");
-		jQuery(".tab5").addClass("current");
-	});
 	
-	// Set form action
-	jQuery(".tabs .journalsTabsSubmit").click(function (event) {
-		var ebscohostsearchtext=document.getElementById('ebscohosttabstext').value;
-    ebscohostsearchtext='('+ebscohostsearchtext.replace(/ /g,'+AND+')+')';
-	//alert(ebscohostsearchtext);
-    window.location.href ='https://login.oca.ucsc.edu/login?url=https://search.ebscohost.com/login.aspx?direct=true&site=ehost-live&scope=site&type=1&db=a9h&authtype=ip&bquery=' + ebscohostsearchtext;
-		event.preventDefault();
-	});
-	jQuery(".select .journalsSelectSubmit").click(function (event) {
-		var ebscohostsearchtext=document.getElementById('ebscohostselecttext').value;
-    ebscohostsearchtext='('+ebscohostsearchtext.replace(/ /g,'+AND+')+')';
-	//alert(ebscohostsearchtext);
-    window.location.href ='https://login.oca.ucsc.edu/login?url=https://search.ebscohost.com/login.aspx?direct=true&site=ehost-live&scope=site&type=1&db=a9h&authtype=ip&bquery=' + ebscohostsearchtext;
-		event.preventDefault();
-	});
+	// search button functions
 	
 	jQuery(".tabs .catalogsSubmit").click(function () {
-		jQuery(".tabs .catalogsForm").attr('action', "https://cruzcat.ucsc.edu/search/X?SEARCH=");
+		document.getElementById("primoTabsQuery").value = "any,contains," + document.getElementById("primoTabsQueryTemp").value.replace(/[,]/g, " ");
+		document.forms["tabsSearchForm"].submit();
 	});
+	
 	jQuery(".select .catalogsSubmit").click(function () {
-		jQuery(".select .catalogsForm").attr('action', "https://cruzcat.ucsc.edu/search/X?SEARCH=");
+		document.getElementById("primoSelectQuery").value = "any,contains," + document.getElementById("primoSelectQueryTemp").value.replace(/[,]/g, " ");
+		document.forms["selectSearchForm"].submit();
 	});
+	
+	jQuery(".tabs .reservesSubmit").click(function () {
+		document.getElementById("reservesTabsQuery").value = "any,contains," + document.getElementById("reservesTabsQueryTemp").value.replace(/[,]/g, " ");
+		document.forms["tabsReserveForm"].submit();
+	});
+	
+	jQuery(".select .reservesSubmit").click(function () {
+		document.getElementById("reservesSelectQuery").value = "any,contains," + document.getElementById("reservesSelectQueryTemp").value.replace(/[,]/g, " ");
+		document.forms["selectReserveForm"].submit();
+	});
+	
 	jQuery(".tabs .melvylSubmit").click(function () {
 		jQuery(".tabs .melvylForm").attr('action', "https://ucsc.worldcat.org/search");
 	});
@@ -84,18 +73,6 @@ jQuery( document ).ready(function() {
 		var reservesFilter = jQuery('select[name="reservesFilter"] :selected').attr('class');
 		var reservesSearch = "https://cruzcat.ucsc.edu/search/" + reservesFilter + "?SEARCH=";
 		jQuery(".select .reservesForm").attr('action', reservesSearch);
-	});
-	jQuery(".tabs .scholarSubmit").click(function () {
-		var scholarString = jQuery('.tabs .scholarSearch').val();
-		var scholarEncoded = encodeURIComponent(scholarString);
-		var scholarSearch = "https://login.oca.ucsc.edu/login?url=https://scholar.google.com/scholar?hl=en&q="+scholarEncoded+"&btnG=&as_sdt=1%2C5&as_sdtp=";
-		jQuery(".tabs .scholarForm").attr('action', scholarSearch);
-	});
-	jQuery(".select .scholarSubmit").click(function () {
-		var scholarString = jQuery('.select .scholarSearch').val();
-		var scholarEncoded = encodeURIComponent(scholarString);
-		var scholarSearch = "https://login.oca.ucsc.edu/login?url=https://scholar.google.com/scholar?hl=en&q="+scholarEncoded+"&btnG=&as_sdt=1%2C5&as_sdtp=";
-		jQuery(".select .scholarForm").attr('action', scholarSearch);
 	});
 	
 	/* select list scripts */
