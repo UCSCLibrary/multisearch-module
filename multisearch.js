@@ -59,10 +59,10 @@ jQuery( document ).ready(function() {
 	});
 	
 	jQuery(".tabs .melvylSubmit").click(function () {
-		jQuery(".tabs .melvylForm").attr('action', "https://ucsc.worldcat.org/search");
+		jQuery(".tabs .melvylForm").attr('action', "https://ucsc.on.worldcat.org/external-search?queryString=");
 	});
 	jQuery(".select .melvylSubmit").click(function () {
-		jQuery(".select .melvylForm").attr('action', "https://ucsc.worldcat.org/search");
+		jQuery(".select .melvylForm").attr('action', "https://ucsc.on.worldcat.org/external-search?queryString=");
 	});
 	jQuery(".tabs .reservesSubmit").click(function () {
 		var reservesFilter = jQuery('select[name="reservesFilter"] :selected').attr('class');
