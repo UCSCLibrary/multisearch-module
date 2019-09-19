@@ -9,9 +9,9 @@ jQuery( document ).ready(function() {
 	
 	
 	// Remove textbox value when user clicks in textbox
-	jQuery(".textbox").click(function() {
+	/* jQuery(".textbox").click(function() {
     	jQuery(this).val("");
-	});
+	});  Commented out 9/16/19 RWS per ticket INC0621545 */
 	
 	// Hide/show functionality for tabs
 	jQuery(".tab1").click(function (e) {
@@ -88,5 +88,42 @@ jQuery( document ).ready(function() {
             }
         });
     }).change();
-	
+
+	/* When the search string on any input is changed, update the others
+	   9/16/19 by RWS from ticket INC0621545 */
+	$('#primoTabsQueryTemp').change(function() {
+	    $('.melvylSearch').val($(this).val());
+	    $('#reservesTabsQueryTemp').val($(this).val());
+	    $('#primoSelectQueryTemp').val($(this).val());
+	    $('#reservesSelectQueryTemp').val($(this).val());
+	});
+
+	$('.melvylSearch').change(function() {
+	    $('#primoTabsQueryTemp').val($(this).val());
+	    $('#reservesTabsQueryTemp').val($(this).val());
+	    $('#primoSelectQueryTemp').val($(this).val());
+	    $('#reservesSelectQueryTemp').val($(this).val());
+	});
+
+	$('#reservesTabsQueryTemp').change(function() {
+	    $('#primoTabsQueryTemp').val($(this).val());
+	    $('.melvylSearch').val($(this).val());
+	    $('#primoSelectQueryTemp').val($(this).val());
+	    $('#reservesSelectQueryTemp').val($(this).val());
+	});
+
+	$('#primoSelectQueryTemp').change(function() {
+	    $('#primoTabsQueryTemp').val($(this).val());
+	    $('.melvylSearch').val($(this).val());
+	    $('#reservesTabsQueryTemp').val($(this).val());
+	    $('#reservesSelectQueryTemp').val($(this).val());
+	});
+
+	$('#reservesSelectQueryTemp').change(function() {
+	    $('#primoTabsQueryTemp').val($(this).val());
+	    $('.melvylSearch').val($(this).val());
+	    $('#reservesTabsQueryTemp').val($(this).val());
+	    $('#primoSelectQueryTemp').val($(this).val());
+	});
+
 });
